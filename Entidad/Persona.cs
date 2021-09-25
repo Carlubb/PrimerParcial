@@ -28,6 +28,23 @@ namespace Entidad
             {
             return $"Identificacion: {Identificacion} - Nombre:{Nombre}-Edad:{Edad} -Sexo:{Sexo} -Pulsacion: {Pulsacion} ";
             }
+        
+             public void CalcularPulsacion()
+        {
+       
+            if (Sexo.ToUpper().Equals("F"))
+            {
+                Pulsacion = (220 - Edad) / 10;
+            }
+            else if (Sexo.ToUpper().Equals("M"))
+            {
+                Pulsacion = (210 - Edad) / 10;
+            }
+            else
+            {
+                Pulsacion = 0;
+            }   
+        
     
     }
 }
