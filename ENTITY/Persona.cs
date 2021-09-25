@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ENTIDAD
+namespace ENTITY
 {
     public class Persona
     {
@@ -39,11 +39,11 @@ namespace ENTIDAD
 
             if (Sexo.ToUpper().Equals("F"))
             {
-                Imc = Peso / (220 * Edad) - 1;
+                Imc = Peso / (Altura * Altura) - 1;
             }
             else if (Sexo.ToUpper().Equals("M"))
             {
-                Imc = Peso / (220 * Edad);
+                Imc = Peso / (Altura * Altura);
             }
             else
             {

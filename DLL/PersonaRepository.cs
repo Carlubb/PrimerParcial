@@ -1,13 +1,16 @@
-﻿using ENTIDAD;
+﻿
+using ENTITY;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace DATOS
+namespace DLL
 {
     public class PersonaRepository
     {
+        private readonly string FileName = "DatosIMC.txt";
+
         public void Guardar(Persona persona)
         {
             FileStream file = new FileStream(FileName, FileMode.Append);
