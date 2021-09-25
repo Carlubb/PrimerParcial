@@ -24,6 +24,10 @@ namespace Entidad
         public string Sexo { get; set; }
         public decimal Pulsacion { get; set; }
         public override string ToString()
+            
+            {
+            return $"Identificacion: {Identificacion} - Nombre:{Nombre}-Edad:{Edad} -Sexo:{Sexo} -Pulsacion: {Pulsacion} ";
+            }
     
     }
 }
