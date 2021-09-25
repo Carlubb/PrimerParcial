@@ -16,7 +16,7 @@ namespace Datos
         {
             FileStream file = new FileStream(FileName, FileMode.Append);
             StreamWriter writer = new StreamWriter(file);
-            writer.WriteLine($"{persona.Identificacion};{persona.Nombre};{persona.Edad};{persona.Sexo};{persona.Pulsacion} ");
+            writer.WriteLine($"{persona.Identificacion};{persona.Nombre};{persona.Edad};{persona.Sexo};{persona.Altura};{persona.Peso};{persona.Imc} ");
             writer.Close();
             file.Close();
         }
@@ -65,7 +65,9 @@ namespace Datos
             persona.Nombre = matrizPersona[1];
             persona.Edad = int.Parse(matrizPersona[2]);
             persona.Sexo = matrizPersona[3];
-            persona.Pulsacion = Convert.ToDecimal(matrizPersona[4]);
+            persona.Altura = decimal.Parse(matrizPersona[4]);
+            persona.Peso = decimal.Parse(matrizPersona[5]);
+            persona.Imc = Convert.ToDecimal(matrizPersona[6]);
             return persona;
         }
 

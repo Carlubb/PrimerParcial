@@ -33,7 +33,7 @@ namespace Entidad
             return $"Identificacion: {Identificacion} - Nombre:{Nombre}-Edad:{Edad} -Sexo:{Sexo} -Altura: {Altura}-Peso: {Peso}-Pulsacion: {Imc} ";
             }
         
-             public void CalcularPulsacion()
+             public void CalcularImc()
         {
        
             if (Sexo.ToUpper().Equals("F"))
