@@ -64,8 +64,8 @@ namespace DLL
             persona.Nombre = matrizPersona[1];
             persona.Edad = int.Parse(matrizPersona[2]);
             persona.Sexo = matrizPersona[3];
-            persona.Altura = decimal.Parse(matrizPersona[4]);
-            persona.Peso = decimal.Parse(matrizPersona[5]);
+            persona.Altura = double.Parse(matrizPersona[4]);
+            persona.Peso = double.Parse(matrizPersona[5]);
             persona.Imc = Convert.ToDecimal(matrizPersona[6]);
             return persona;
         }

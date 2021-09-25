@@ -16,8 +16,8 @@ namespace Presentacion
                 string nombre;
                 int edad;
                 string sexo;
-                decimal altura;
-                decimal peso;
+                double altura;
+                double peso;
 
                 Console.WriteLine("Digite la identificacion");
                 identificacion = Console.ReadLine();
@@ -32,16 +32,22 @@ namespace Presentacion
                 edad = int.Parse(Console.ReadLine());
 
                 Console.WriteLine("Digite la altura en metros");
-                altura = decimal.Parse(Console.ReadLine());
+                altura = double.Parse(Console.ReadLine());
 
                 Console.WriteLine("Digite el peso en kilos");
-                peso = decimal.Parse(Console.ReadLine());
+                peso = double.Parse(Console.ReadLine());
 
                 Persona persona = new Persona(identificacion, nombre, edad, sexo, altura, peso);
                 PersonaService personaService = new PersonaService();
                 persona.CalcularImc();
                 string message = personaService.Guardar(persona);
-                Console.WriteLine($"SU INDICE DE MASA CORPORAL ES:  {persona.Imc} " + message);
+                
+
+                if(persona.Imc > 20)
+                {
+                    Console.WriteLine("USTED TIENE SOBREPESO \n");
+                    Console.WriteLine($"SU INDICE DE MASA CORPORAL ES:  {persona.Imc} " + message);
+                }
             }
 
             static void Consultar(PersonaService personaService)
