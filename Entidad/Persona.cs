@@ -5,12 +5,14 @@ namespace Entidad
     public class Persona
     {
     
-    public Persona(string identificacion, string nombre, int edad, string sexo)
+    public Persona(string identificacion, string nombre, int edad, string sexo, decimal altura, decimal peso)
         {
             Identificacion = identificacion;
             Nombre = nombre;
             Edad = edad;
             Sexo = sexo;
+            Altura = altura;
+            Peso = peso;
         }
         
         public Persona()
@@ -22,11 +24,13 @@ namespace Entidad
         public string Nombre { get; set; }
         public int Edad { get; set; }
         public string Sexo { get; set; }
-        public decimal Pulsacion { get; set; }
+        public decimal Altura { get; set; }
+        public decimal Peso { get; set; }
+        public decimal Imc { get; set; }
         public override string ToString()
             
             {
-            return $"Identificacion: {Identificacion} - Nombre:{Nombre}-Edad:{Edad} -Sexo:{Sexo} -Pulsacion: {Pulsacion} ";
+            return $"Identificacion: {Identificacion} - Nombre:{Nombre}-Edad:{Edad} -Sexo:{Sexo} -Altura: {Altura}-Peso: {Peso}-Pulsacion: {Imc} ";
             }
         
              public void CalcularPulsacion()
@@ -34,17 +38,17 @@ namespace Entidad
        
             if (Sexo.ToUpper().Equals("F"))
             {
-                Pulsacion = (220 - Edad) / 10;
+                Imc = Peso/(220 * Edad) - 1;
             }
             else if (Sexo.ToUpper().Equals("M"))
             {
-                Pulsacion = (210 - Edad) / 10;
+                Imc = Peso / (220 * Edad) ;
             }
             else
             {
-                Pulsacion = 0;
-            }   
-        
-    
+                Imc = 0;
+            }
+
+        }
     }
 }
