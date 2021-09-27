@@ -41,13 +41,49 @@ namespace Presentacion
                 PersonaService personaService = new PersonaService();
                 persona.CalcularImc();
                 string message = personaService.Guardar(persona);
-                
 
-                if(persona.Imc > 20)
-                {
-                    Console.WriteLine("USTED TIENE SOBREPESO \n");
-                    Console.WriteLine($"SU INDICE DE MASA CORPORAL ES:  {persona.Imc} " + message);
-                }
+                string estado = (persona.Imc < 18) ? "Peso inferior a lo normal" :
+                                (persona.Imc < 25) ? "Peso normal" :
+                                (persona.Imc < 30) ? "Obesidad" : "Sobrepeso";
+
+                Console.WriteLine(estado);
+                Console.WriteLine($"Su indice de masa corporal es : {persona.Imc} " + message);
+            }
+
+
+            static void Editar()
+            {
+                string identificacion;
+                string nombre;
+                int edad;
+                string sexo;
+                double altura;
+                double peso;
+
+                Console.WriteLine("Digite la identificacion");
+                identificacion = Console.ReadLine();
+
+                Console.WriteLine("Digite el nombre");
+                nombre = Console.ReadLine();
+
+                Console.WriteLine("Digite el sexo");
+                sexo = Console.ReadLine();
+
+                Console.WriteLine("Digite la edad");
+                edad = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Digite la altura en metros");
+                altura = double.Parse(Console.ReadLine());
+
+                Console.WriteLine("Digite el peso en kilos");
+                peso = double.Parse(Console.ReadLine());
+
+                Persona persona = new Persona(identificacion, nombre, edad, sexo, altura, peso);
+                PersonaService personaService = new PersonaService();
+                persona.CalcularImc();
+                string message = personaService.Modificar(persona,identificacion);
+
+
             }
 
             static void Consultar(PersonaService personaService)
@@ -76,7 +112,12 @@ namespace Presentacion
 
                 PersonaResponse personaResponse = personaService.BuscarPorIdentificacion(identificacion);
                 if (personaResponse.PersonaEncontrada == true)
+                {
                     Console.WriteLine(personaResponse.Persona.ToString());
+                    Editar();
+                }
+                    
+
                 else
                 {
                     Console.WriteLine(personaResponse.Message);
@@ -93,47 +134,61 @@ namespace Presentacion
                 Console.WriteLine(messageEliminacion);
             }
 
-            Console.WriteLine("Seleccionar una opcion  \n"+
+            char Opcion;
+            string Continuar;
+
+            do
+            {
+                Console.WriteLine("Seleccionar una opcion  \n" +
             "\n1. CALCULAR INDICE DE MASA CORPORAL" +
             "\n2. MOSTRAS HISTORIAL DE PERSONAS" +
             "\n3. ELIMINAR PERSONA" +
-            "\n4. BUSCAR POR IDENTIFICACION" +
+            "\n4. MODIFICAR" +
             "\n5. SALIR \n");
+                do
+                {
+                    Opcion = Console.ReadKey(true).KeyChar;
 
-            String S1 = null;
-            S1 = Console.ReadLine();
+                } while (Opcion < '0' || Opcion > '5');
 
-            switch (S1)
-            {
-                case "1":
-                    Calcular();
-                    break;
-                case "2":
-                    PersonaService personaService = new PersonaService();
-                    Consultar(personaService);
-                    break;
-                case "3":
-                    Eliminar();
-                    break;
-                case "4":
-                    Buscar_Por_Identificacion();
-                    break;
-                case "5":
-                    Console.WriteLine("Opcion");
-                    break;
-                default:
-                    Console.WriteLine("Seleccione una opcion valida");
-                    break;
+                switch (Opcion)
+                {
+                    case '1':
+                        Calcular();
+                        break;
+                    case '2':
+                        PersonaService personaService = new PersonaService();
+                        Consultar(personaService);
+                        break;
+                    case '3':
+                        Eliminar();
+                        break;
+                    case '4':
+                        Buscar_Por_Identificacion();
+                        break;
+                    case '5':
+                        
+                        break;
+                    default:
+                        Console.WriteLine("Seleccione una opcion valida");
+                        break;
+
+                }
+
+                Console.WriteLine("Desea continuar?(s/n)");
+                Continuar = Console.ReadLine();
+                Console.WriteLine("\n");
+                Console.Clear();
+
+
 
             }
 
-            Console.ReadKey();
+            while (Continuar != "n");
 
+ 
 
         }
-
-         
-
 
     }
 }

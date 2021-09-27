@@ -27,7 +27,7 @@ namespace ENTITY
         public string Sexo { get; set; }
         public double Altura { get; set; }
         public double Peso { get; set; }
-        public decimal Imc { get; set; }
+        public double Imc { get; set; }
         public override string ToString()
 
         {
@@ -39,11 +39,12 @@ namespace ENTITY
 
             if (Sexo.ToUpper().Equals("F"))
             {
-                Imc = Convert.ToDecimal( Peso + Peso );
+                Imc = Math.Round(Peso/(double)Math.Pow(Altura,2),2);
             }
             else if (Sexo.ToUpper().Equals("M"))
             {
-                Imc = Convert.ToDecimal(Peso / (Altura * Altura));
+
+                Imc = Math.Round(Peso / (double)Math.Pow(Altura, 2), 2);
             }
             else
             {

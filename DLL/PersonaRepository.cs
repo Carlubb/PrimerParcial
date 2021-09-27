@@ -66,7 +66,7 @@ namespace DLL
             persona.Sexo = matrizPersona[3];
             persona.Altura = double.Parse(matrizPersona[4]);
             persona.Peso = double.Parse(matrizPersona[5]);
-            persona.Imc = Convert.ToDecimal(matrizPersona[6]);
+            persona.Imc = double.Parse(matrizPersona[6]);
             return persona;
         }
 
@@ -87,25 +87,51 @@ namespace DLL
 
         }
 
-        public void Modificar(Persona personaOld, Persona personaNew)
+        public void Modificar(Persona personaNuevo, string identificacion)
         {
-            List<Persona> personas = new List<Persona>();
-            personas = ConsultarTodos();
+            List<Persona> personas = Consultar();
             FileStream file = new FileStream(FileName, FileMode.Create);
             file.Close();
             foreach (var item in personas)
             {
-                if (!EsEncontrado(item.Identificacion, personaOld.Identificacion))
+                if (!item.Identificacion.Equals(identificacion))
                 {
                     Guardar(item);
                 }
                 else
                 {
-                    Guardar(personaNew);
+                    Guardar(personaNuevo);
                 }
-
             }
+        }
 
+        public List<Persona> Consultar()
+        {
+            List<Persona> personas = new List<Persona>();
+            FileStream file = new FileStream(FileName, FileMode.OpenOrCreate);
+            StreamReader lector = new StreamReader(file);
+            string linea = "";
+            while ((linea = lector.ReadLine()) != null)
+            {
+                Persona persona = Map(linea);
+                personas.Add(persona);
+            }
+            lector.Close();
+            file.Close();
+            return personas;
+        }
+
+        public Persona BuscarPorIdentificacion(string identificacion)
+        {
+
+            foreach (var item in Consultar())
+            {
+                if (item.Identificacion.Equals(identificacion))
+                {
+                    return item;
+                }
+            }
+            return null;
         }
     }
 }

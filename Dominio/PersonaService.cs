@@ -59,6 +59,25 @@ namespace DOMINIO
 
         }
 
+        public string Modificar(Persona personaNueva, string identificacion)
+        {
+
+            try
+            {
+                if (personaRepository.BuscarPorIdentificacion(identificacion) != null)
+                {
+                    personaRepository.Modificar(personaNueva, identificacion);
+                    return $"Se Modificó a la Persona con idnetificacion {identificacion}";
+                }
+                return $"No se encontró a la persona con Identificacion {identificacion}";
+            }
+            catch (Exception exception)
+            {
+
+                return "Se presentó el siguiente error:" + exception.Message;
+            }
+        }
+
         public PersonaResponse BuscarPorIdentificacion(string identificacion)
         {
             PersonaResponse personaResponse;
