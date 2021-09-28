@@ -82,7 +82,12 @@ namespace Presentacion
                 PersonaService personaService = new PersonaService();
                 persona.CalcularImc();
                 string message = personaService.Modificar(persona,identificacion);
+                string estado = (persona.Imc < 18) ? "Peso inferior a lo normal" :
+                                (persona.Imc < 25) ? "Peso normal" :
+                                (persona.Imc < 30) ? "Obesidad" : "Sobrepeso";
 
+                Console.WriteLine(estado);
+                Console.WriteLine($"Su indice de masa corporal es : {persona.Imc} " + message);
 
             }
 

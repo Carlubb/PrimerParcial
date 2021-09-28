@@ -38,6 +38,21 @@ namespace DLL
             return identificacioRegistrada == identificacionBuscada;
         }
 
+        private Persona Map(string linea)
+        {
+            Persona persona = new Persona();
+            char delimiter = ';';
+            string[] matrizPersona = linea.Split(delimiter);
+            persona.Identificacion = matrizPersona[0];
+            persona.Nombre = matrizPersona[1];
+            persona.Edad = int.Parse(matrizPersona[2]);
+            persona.Sexo = matrizPersona[3];
+            persona.Altura = double.Parse(matrizPersona[4]);
+            persona.Peso = double.Parse(matrizPersona[5]);
+            persona.Imc = double.Parse(matrizPersona[6]);
+            return persona;
+        }
+
         public List<Persona> ConsultarTodos()
         {
             List<Persona> personas = new List<Persona>();
@@ -55,21 +70,7 @@ namespace DLL
             return personas;
         }
 
-        private Persona Map(string linea)
-        {
-            Persona persona = new Persona();
-            char delimiter = ';';
-            string[] matrizPersona = linea.Split(delimiter);
-            persona.Identificacion = matrizPersona[0];
-            persona.Nombre = matrizPersona[1];
-            persona.Edad = int.Parse(matrizPersona[2]);
-            persona.Sexo = matrizPersona[3];
-            persona.Altura = double.Parse(matrizPersona[4]);
-            persona.Peso = double.Parse(matrizPersona[5]);
-            persona.Imc = double.Parse(matrizPersona[6]);
-            return persona;
-        }
-
+       
         public void Eliminar(string identificacion)
         {
             List<Persona> personas = new List<Persona>();
@@ -84,7 +85,6 @@ namespace DLL
                 }
 
             }
-
         }
 
         public void Modificar(Persona personaNuevo, string identificacion)
