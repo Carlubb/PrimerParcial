@@ -18,36 +18,45 @@ namespace Presentacion
                 string sexo;
                 double altura;
                 double peso;
+                try
+                {
+                    Console.WriteLine("Digite la identificacion");
+                    identificacion = Console.ReadLine();
 
-                Console.WriteLine("Digite la identificacion");
-                identificacion = Console.ReadLine();
+                    Console.WriteLine("Digite el nombre");
+                    nombre = Console.ReadLine();
 
-                Console.WriteLine("Digite el nombre");
-                nombre = Console.ReadLine();
+                    Console.WriteLine("Digite el sexo");
+                    sexo = Console.ReadLine();
 
-                Console.WriteLine("Digite el sexo");
-                sexo = Console.ReadLine();
+                    Console.WriteLine("Digite la edad");
+                    edad = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("Digite la edad");
-                edad = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Digite la altura en metros");
+                    altura = double.Parse(Console.ReadLine());
 
-                Console.WriteLine("Digite la altura en metros");
-                altura = double.Parse(Console.ReadLine());
+                    Console.WriteLine("Digite el peso en kilos");
+                    peso = double.Parse(Console.ReadLine());
 
-                Console.WriteLine("Digite el peso en kilos");
-                peso = double.Parse(Console.ReadLine());
+                    Persona persona = new Persona(identificacion, nombre, edad, sexo, altura, peso);
+                    PersonaService personaService = new PersonaService();
+                    persona.CalcularImc();
+                    string message = personaService.Guardar(persona);
 
-                Persona persona = new Persona(identificacion, nombre, edad, sexo, altura, peso);
-                PersonaService personaService = new PersonaService();
-                persona.CalcularImc();
-                string message = personaService.Guardar(persona);
+                    string estado = (persona.Imc < 18) ? "Peso inferior a lo normal" :
+                                    (persona.Imc < 25) ? "Peso normal" :
+                                    (persona.Imc < 30) ? "Obesidad" : "Sobrepeso";
 
-                string estado = (persona.Imc < 18) ? "Peso inferior a lo normal" :
-                                (persona.Imc < 25) ? "Peso normal" :
-                                (persona.Imc < 30) ? "Obesidad" : "Sobrepeso";
+                    Console.WriteLine(estado);
+                    Console.WriteLine($"Su indice de masa corporal es : {persona.Imc} " + message);
 
-                Console.WriteLine(estado);
-                Console.WriteLine($"Su indice de masa corporal es : {persona.Imc} " + message);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                
             }
 
 

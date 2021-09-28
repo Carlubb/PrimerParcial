@@ -37,19 +37,10 @@ namespace ENTITY
         public void CalcularImc()
         {
 
-            if (Sexo.ToUpper().Equals("F"))
-            {
+            
                 Imc = Math.Round(Peso/(double)Math.Pow(Altura,2),2);
-            }
-            else if (Sexo.ToUpper().Equals("M"))
-            {
-
-                Imc = Math.Round(Peso / (double)Math.Pow(Altura, 2), 2);
-            }
-            else
-            {
-                Imc = 0;
-            }
+           
+                   
 
         }
     }

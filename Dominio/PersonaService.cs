@@ -19,21 +19,18 @@ namespace DOMINIO
         {
             try
             {
-
-                if (personaRepository.Buscar(persona.Identificacion) == null)
+                if (personaRepository.BuscarPorIdentificacion(persona.Identificacion) == null)
                 {
                     personaRepository.Guardar(persona);
-                    return $"se han guardado Satisfactoriamente los datos de: {persona.Nombre} ";
+                    return "Datos Guardados Satisfactoriamente";
                 }
-                else
-                {
-                    return $"Lo sentimos, con la Identificación {persona.Identificacion} ya se encuentra registrada";
-                }
+                return $"La Persona con la Identificacion {persona.Identificacion} ya se encuentra registrada";
+
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
 
-                return $"Error de la Aplicacion: {e.Message}";
+                return "Se presentó el siguiente error:" + exception.Message;
             }
         }
 
@@ -41,20 +38,17 @@ namespace DOMINIO
         {
             try
             {
-                if (personaRepository.Buscar(identificacion) != null)
+                if (personaRepository.BuscarPorIdentificacion(identificacion) != null)
                 {
                     personaRepository.Eliminar(identificacion);
-                    return ($"se han Eliminado Satisfactoriamente los datos de la persona con Identificación: {identificacion} ");
+                    return $"Se eliminó a la Persona con idnetificacion {identificacion}";
                 }
-                else
-                {
-                    return ($"Lo sentimos, no se encuentra registrada una persona con Identificacion {identificacion}");
-                }
+                return $"No se encontró a la persona con Identificacion {identificacion}";
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
 
-                return $"Error de la Aplicacion: {e.Message}";
+                return "Se presentó el siguiente error:" + exception.Message;
             }
 
         }
